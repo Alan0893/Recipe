@@ -1,10 +1,6 @@
 Idea 1
-User inputs a poem and the application returns a song from Spotify that matches it. A potential way to match the poem to the song is find the song with the most overlap between the lyrics and the words of the poems. 
-
-
-
+User inputs a poem and the application returns a song from Spotify that matches it. A potential way to match the poem to the song is find the song with the most overlap between the lyrics and the words of the poem. 
 
 Idea 2
-
-
+User inputs ingredients they have then the application suggests recipes they can make with them and adds the remaining ingredients to an online grocery delivery service. 
 
