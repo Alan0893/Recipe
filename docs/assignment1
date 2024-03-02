@@ -1,5 +1,12 @@
 Idea 1
-User inputs a poem and the application returns a song from Spotify that matches it. A potential way to match the poem to the song is find the song with the most overlap between the lyrics and the words of the poem. 
+The user inputs a poem and the application returns a song from Spotify that matches it. A potential way to match the poem to the song is to find the song with the most overlap between the lyrics and the words of the poem. 
+- Login for Spotify 
+- Similarity score between poems from PoetryFoundation for object description of paintings from the National Gallery of Art and song from Spotify
+- create an account and that can save past results of poem and painting couplings and add songs to a playlist on your Spotify account 
 
 Idea 2
-User inputs ingredients they have then the application suggests recipes they can make with them and adds the remaining ingredients to an online grocery delivery service. 
+Users input their ingredients, and then the application suggests recipes they can make with them and adds the remaining ingredients to an online grocery delivery service. 
+- login for myTarget / Amazon to create the grocery list or any grocery delivery API
+- access Spoonacular as a recipe API 
+- create an account and it can save past favorited recipes 
+- ingredients correlated with recipes found on Spoonacular 
