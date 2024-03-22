@@ -6,7 +6,7 @@ import LoginScreen from "./pages/LoginScreen";
 const App = () => {
   // State to store the user
   const [user, setUser] = useAuth();
-
+  
   return (
     user ? 
       <div>Welcome, {user.displayName}</div> 
