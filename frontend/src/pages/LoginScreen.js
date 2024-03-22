@@ -10,20 +10,31 @@ const admin = initializeApp(config);
 
 // Setting the styles of the page
 const LoginContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	height: 100%;
 	min-height: 100vh;
-	background-color: #000000;
+	background-color: #FFE3E2;
 `;
 const Login = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	height: 100%;
 `;
-const LoginButton = styled.button`
+const Title = styled.h2`
+	color: #E8A4A5;
+`;
+const Desc = styled.h1`
+	color: #A2C14A;
+	text-transform: uppercase;
+`;
+const LoginButton = styled.a`
 	display: inline-block;
-	background-color: #4285f4;
-	color: #ffffff;
+	background-color: #E9A3A2;
+	color: #FFE3E2;
 	border-radius: 30px;
 	padding: 17px 35px;
 	margin: 20px 0 70px;
@@ -32,6 +43,18 @@ const LoginButton = styled.button`
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	text-align: center;
+	&:hover,
+  &:focus {
+    background-color: #d38685;
+  }
+`;
+const Icon = styled.img`
+	align-self: center;
+	margin-right: 10px;
+	width: 25px;
+	height: 25px;
+	display: inline-block;
+	vertical-align: middle;
 `;
 
 const LoginScreen = () => {
@@ -64,13 +87,15 @@ const LoginScreen = () => {
       });
   }
 
-	
-
 	return (
 		<LoginContainer>
 			<Login>
-				<h1>Google Login</h1>
-				<LoginButton onClick={handleLogin}>Login with Google</LoginButton>
+				<Title>Munchy Minion</Title>
+				<Desc>Hungry? We got you!</Desc>
+				<LoginButton onClick={handleLogin}>
+					<Icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1280px-Google_%22G%22_logo.svg.png" alt="Google Logo" />
+					Login with Google
+				</LoginButton>
 			</Login>
 		</LoginContainer>
 	)
