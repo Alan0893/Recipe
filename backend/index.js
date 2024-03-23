@@ -35,7 +35,6 @@ app.get('/', (req, res) => {
 	res.render(path.resolve(__dirname, '../frontend/build', 'index.html'));
 });
 
-
 // Running the app
 app.listen(3000, function () {
 	console.log('Listening on port 3000');

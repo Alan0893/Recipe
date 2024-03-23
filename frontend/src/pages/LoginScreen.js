@@ -72,8 +72,8 @@ const LoginScreen = () => {
         const token = credential.accessToken;
         // The signed-in user info
         const user = result.user;
-        console.log(user);
-        // getAdditionalUserInfo(result)
+
+				
       }).catch((error) => {
         // Handle Errors
         const errorCode = error.code;
