@@ -1,12 +1,16 @@
 // Importing all the necessary dependencies & modules
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 import config from '../firebase/config';
 
 import styled from 'styled-components';
 
 // Initalize Firebase
 const admin = initializeApp(config);
+
+// Initialize Firestore
+const db = getFirestore(admin);
 
 // Setting the styles of the page
 const LoginContainer = styled.div`
@@ -66,14 +70,26 @@ const LoginScreen = () => {
 
     // Signing in with Google
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async (result) => {
         // Google Access Token
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         // The signed-in user info
         const user = result.user;
+				console.log(user)
 
-				
+				// Getting the users collection
+				const userDoc = doc(db, 'users', user.uid);
+				const docSnap = await getDoc(userDoc);
+
+				// If the user does not exist, create a new user
+				if (!docSnap.exists()) {
+					await setDoc(userDoc, {
+						name: user.displayName,
+						email: user.email,
+						recipes: {}
+					});
+				}
       }).catch((error) => {
         // Handle Errors
         const errorCode = error.code;

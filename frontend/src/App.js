@@ -1,5 +1,4 @@
 // Importing all necessary dependencies & modules
-import { useEffect, useState } from 'react';
 import { useAuth } from './api/index';
 import LoginScreen from "./pages/LoginScreen";
 
