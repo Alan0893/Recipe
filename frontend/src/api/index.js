@@ -1,3 +1,4 @@
+// Importing necessary modules
 import { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
@@ -5,6 +6,7 @@ export const useAuth = () => {
 	const [user, setUser] = useState(null);
 	const auth = getAuth();
 
+	// Subscribe to user on mount
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {

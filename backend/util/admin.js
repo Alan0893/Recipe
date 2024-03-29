@@ -1,7 +1,7 @@
 // Importing all necessary modules
-const { initializeApp } = require('firebase-admin/app');
-const { getFirestore } = require('firebase-admin/firestore');
-const { getAuth } = require('firebase-admin/auth');
+const { initializeApp } = require('firebase/app');
+const { getFirestore } = require('firebase/firestore');
+const { getAuth } = require('firebase/auth');
 
 // Getting the firebase configuration
 const config = require('./config');

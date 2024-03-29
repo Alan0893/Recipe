@@ -1,12 +1,17 @@
 // Importing all the necessary dependencies & modules
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 import config from '../firebase/config';
+import axios from 'axios';
 
 import styled from 'styled-components';
 
 // Initalize Firebase
 const admin = initializeApp(config);
+ 
+// Initialize Firestore
+const db = getFirestore(admin);
 
 // Setting the styles of the page
 const LoginContainer = styled.div`
@@ -66,14 +71,14 @@ const LoginScreen = () => {
 
     // Signing in with Google
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async (result) => {
         // Google Access Token
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         // The signed-in user info
         const user = result.user;
-        console.log(user);
-        // getAdditionalUserInfo(result)
+				// Initialize the user, if user does not exist
+				await axios.get(`/initialize/${user.uid}`);
       }).catch((error) => {
         // Handle Errors
         const errorCode = error.code;
