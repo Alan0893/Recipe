@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from './api/index';
 import LoginScreen from "./pages/LoginScreen";
+import LoginPage from './pages/LoginPage';
 
 const App = () => {
   // State to store the user
@@ -10,7 +11,7 @@ const App = () => {
   return (
     user ? 
       <div>Welcome, {user.displayName}</div> 
-      : <LoginScreen />
+      : <LoginPage />
   )
 }
 
