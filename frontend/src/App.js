@@ -29,7 +29,7 @@ const App = () => {
   return (
     user ? 
       <div>Welcome, {user.displayName}</div> 
-      : <LoginPage />
+      : <LoginScreen />
   )
 }
 

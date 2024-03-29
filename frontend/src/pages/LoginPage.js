@@ -13,7 +13,9 @@ const admin = initializeApp(config);
 const Container = styled.div`
     background-color:  #FEE3E2 ; 
     width: 100%;
-    height: 100vh;
+    min-width: 100vw;
+    height: 100%;
+    min-height: 100vh;
     display: flex;
 `;
 const Title = styled.h1`
@@ -147,10 +149,7 @@ export default function LoginPage() {
 				</LoginButton>
                 <Image1 src="leaf.png" alt="leaf" />
             </SubDiv>
-            <ImageContainer>
-                <Image2 src="leaf2.png" alt="leaf2" />
-                <Image3 src="food.png" alt="food" />
-            </ImageContainer>
+               
 
         </Container>
     )
