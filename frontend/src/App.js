@@ -2,11 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from './api/index';
 import LoginScreen from "./pages/LoginScreen";
-<<<<<<< HEAD
 import axios from 'axios';
-=======
 import LoginPage from './pages/LoginPage';
->>>>>>> 258ddc60e0a384e45a130692ad4d2bff3ea91817
 
 const App = () => {
   // State to store the user
