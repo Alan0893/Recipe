@@ -30,22 +30,22 @@ const Login = styled.div`
 const Title = styled.h2`
 	font-family: Geneva; 
 	color: #E9A3A0; 
-	font-size: 250%; 
+	font-size: 300%; 
 
 `;
 const Desc = styled.h1`
 	font-family: Geneva;
 	color: #A3C14B; 
-	font-size: 500%;
+	font-size: 800%;
 	margin-bottom: 0px;
-	letter-spacing: 5px; 
+	letter-spacing: 7px; 
 	font-weight: 150; 
 	text-transform: uppercase;
-	margin-top: -10px; 
+	margin-top: -40px; 
 `;
 const ButtonDiv = styled.div`
-	margin-left: 150px;
-	margin-top: 50px;
+	margin-left: 250px;
+	margin-top: 30px;
 	z-index: 1;
 `;
 const LoginButton = styled.button`
@@ -53,17 +53,18 @@ const LoginButton = styled.button`
 	display: inline-block;
 	background-color: #E9A3A2;
 	color: #FFE3E2;
-	border-radius: 30px;
+	border-radius: 40px;
 	min-width: 160px;
-	font-weight: 700;
+	font-weight: 1000;
 	letter-spacing: 2px;
 	text-transform: uppercase;
-	font-size: 20px; 
+	font-size: 25px; 
+	font-style: bold;
 	text-align: center;
-	width: 200px;
-    height: 120px;
+	width: 280px;
+    height: 150px;
 	border-color: #E9A3A2; 
-	line-height: 35px;
+	line-height: 40px;
 	&:hover,
   	&:focus {
 		background-color: #d38685;
@@ -79,7 +80,7 @@ const Icon = styled.img`
 `;
 
 const Image1 = styled.img`
-    width: 400px;
+    width: 430px;
     height: auto;
     position: absolute;
     transform: rotate(-10deg);
@@ -89,7 +90,7 @@ const Image1 = styled.img`
 `;
 
 const Image2 = styled.img`
-    width: 500px;
+    width: 600px;
     height: auto;
     position: absolute;
     top: 0;
@@ -101,10 +102,14 @@ const Image3 = styled.img`
     height: auto;
     position: absolute;
     top: 40%;
-	left: 40%;
+	left: 45%;
     transform: translate(10%, -10%); 
 `;
-
+const Border = styled.div`
+	background-color: #FED863;
+	width: 100%;
+	height: 10%;
+`;
 const LoginScreen = () => {
 	// Function to handle login
   const handleLogin = () => {
@@ -136,6 +141,7 @@ const LoginScreen = () => {
   }
 
 	return (
+
 		<LoginContainer>
 			<Login>
 				<Title>Munchy Minion</Title>
