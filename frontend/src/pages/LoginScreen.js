@@ -16,9 +16,10 @@ const db = getFirestore(admin);
 // Setting the styles of the page
 const LoginContainer = styled.div`
 	display: flex;
-	height: 100%;
-	min-height: 100vh;
+	height: 100vh;
 	background-color: #FFE3E2;
+	border-bottom: 35px solid #FED763;
+	overflow: hidden;
 `;
 const Login = styled.div`
 	display: flex;
@@ -105,11 +106,7 @@ const Image3 = styled.img`
 	left: 45%;
     transform: translate(10%, -10%); 
 `;
-const Border = styled.div`
-	background-color: #FED863;
-	width: 100%;
-	height: 10%;
-`;
+
 const LoginScreen = () => {
 	// Function to handle login
   const handleLogin = () => {
