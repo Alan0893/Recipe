@@ -150,6 +150,44 @@ app.post('/recipes/:userId', async (req, res) => {
 		return res.status(500).json({ error: error.message });
 	}
 });
+// Delete a recipe for the user
+app.delete('/recipes/:userId/:recipeId', async (req, res) => {
+	try {
+		const userId = req.params.userId;
+		const recipeId = req.params.recipeId;
+
+		// Check if userId and recipeId are provided
+		if (!userId || !recipeId) {
+			return res.status(400).json({ error: 'User ID or Recipe ID not provided' });
+		}
+
+		// Fetch user document
+		const userDocRef = doc(db, 'users', userId);
+		const userDocSnapshot = await getDoc(userDocRef);
+
+		if (!userDocSnapshot.exists()) {
+			return res.status(404).json({ error: 'User not found' });
+		}
+
+		const userData = userDocSnapshot.data();
+		const recipes = userData.recipes || {};
+
+		if (!recipes[recipeId]) {
+			return res.status(404).json({ error: 'Recipe not found' });
+		}
+
+		// Delete the recipe from the user's document
+		delete recipes[recipeId];
+		await updateDoc(userDocRef, {
+			recipes
+		});
+
+		return res.status(200).json({ message: 'Recipe deleted successfully' });
+	} catch (error) {
+		console.error('Error deleting recipe: ', error);
+		return res.status(500).json({ error: error.message });
+	}
+});
 
 // SPOONACULAR API ****************************************************************
 app.get('/search', async (req, res) => {
