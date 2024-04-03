@@ -3,11 +3,13 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const history	= require('connect-history-api-fallback');
+const axios = require('axios');
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
 // Importing modules
 const { db } = require('./util/admin');
 const { doc, getDoc } =  require('firebase/firestore');
-const path = require('path');
 
 // Initializing the express app
 const app = express();
@@ -159,6 +161,54 @@ app.get('/recipes/:userId/:recipeId', async (req, res) => {
 		return res.status(200).json({ recipe: recipes[recipeId] });
 	} catch (error) {
 		console.error('Error fetching recipe: ', error);
+		return res.status(500).json({ error: error.message });
+	}
+});
+
+// SPOONACULAR API ****************************************************************
+app.get('/search', async (req, res) => {
+	try {
+		const ingredients = req.query.ingredients;
+
+		const recipes = await axios.get(
+			`https://api.spoonacular.com/recipes/findByIngredients?ingredients=
+			${ingredients}&apiKey=${process.env.SPOONACULAR_API_KEY}`
+		);
+		const recipe = recipes.data[0];
+		const recipeId = recipe.id;
+
+		const info = await axios.get(
+			`https://api.spoonacular.com/recipes/${recipeId}/information?
+			apiKey=${process.env.SPOONACULAR_API_KEY}`
+		);
+		
+		const combinedRes = {
+			recipe: recipe,
+			info: info.data
+		};
+		
+		return res.status(200).json({ recipe: combinedRes });
+	} catch (error) {
+		console.error('Error fetching data from Spoonacular: ', error);
+		return res.status(500).json({ error: error.message });
+	}
+});
+
+// TARGET API ****************************************************************
+app.get('/target', async (req, res) => {
+	const ingredient = req.query.ingredient;
+
+	try {
+		const response = await axios.get(
+			`https://api.redcircleapi.com/request?
+			api_key=${process.env.TARGET_API_KEY}&
+			type=search&search_term=${ingredient}&
+			category_id=5xt1a&sort_by=best_seller`
+		);
+
+		return res.status(200).json({ response: response.data[0] });
+	} catch (error) {
+		console.error('Error fetching data from Target: ', error);
 		return res.status(500).json({ error: error.message });
 	}
 });
