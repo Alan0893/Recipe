@@ -1,8 +1,6 @@
 // Requiring all the necessary dependencies
 const express = require('express');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
-const history	= require('connect-history-api-fallback');
 const axios = require('axios');
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
@@ -24,18 +22,6 @@ const generateId = () => {
 
 // Priority to serve any static files
 app.use(express.static(path.resolve(__dirname, '../frontend/build')));
-app.use(express.static(path.resolve(__dirname, 'public')))
-	.use(cors())
-	.use(cookieParser())
-	.use(
-		history({
-			verbose: true,
-			rewrites: [
-				{ from: /\/login/, to: '/login'}
-			]
-		})
-	)
-	.use(express.static(path.resolve(__dirname, '../frontend/build')));
 
 // ROUTING *****************************************************************
 // Home Page
@@ -65,6 +51,38 @@ app.get('/initialize/:userId', async (req, res) => {
 		return res.status(200).json({ message: 'User initialized' });
 	} catch (error) {
 		console.error('Error initializing user: ', error);
+		return res.status(500).json({ error: error.message });
+	}
+});
+// Getting a single recipe 
+app.get('/recipes/:userId/:recipeId', async (req, res) => {
+	try {
+		const userId = req.params.userId;
+		const recipeId = req.params.recipeId;
+
+		// Check if userId and recipeId are provided
+		if (!userId || !recipeId) {
+			return res.status(400).json({ error: 'User ID or Recipe ID not provided' });
+		}
+
+		// Fetch user document
+		const userDocRef = doc(db, 'users', userId);
+		const userDocSnapshot = await getDoc(userDocRef);
+
+		if (!userDocSnapshot.exists()) {
+			return res.status(404).json({ error: 'User not found' });
+		}
+
+		const userData = userDocSnapshot.data();
+		const recipes = userData.recipes || {};
+
+		if (!recipes[recipeId]) {
+			return res.status(404).json({ error: 'Recipe not found' });
+		}
+
+		return res.status(200).json({ recipe: recipes[recipeId] });
+	} catch (error) {
+		console.error('Error fetching recipe: ', error);
 		return res.status(500).json({ error: error.message });
 	}
 });
@@ -129,38 +147,6 @@ app.post('/recipes/:userId', async (req, res) => {
 		return res.status(200).json({ message: 'Recipe added successfully' });
  	} catch (error) {
 		console.error('Error adding recipe: ', error);
-		return res.status(500).json({ error: error.message });
-	}
-});
-// Getting a single recipe 
-app.get('/recipes/:userId/:recipeId', async (req, res) => {
-	try {
-		const userId = req.params.userId;
-		const recipeId = req.params.recipeId;
-
-		// Check if userId and recipeId are provided
-		if (!userId || !recipeId) {
-			return res.status(400).json({ error: 'User ID or Recipe ID not provided' });
-		}
-
-		// Fetch user document
-		const userDocRef = doc(db, 'users', userId);
-		const userDocSnapshot = await getDoc(userDocRef);
-
-		if (!userDocSnapshot.exists()) {
-			return res.status(404).json({ error: 'User not found' });
-		}
-
-		const userData = userDocSnapshot.data();
-		const recipes = userData.recipes || {};
-
-		if (!recipes[recipeId]) {
-			return res.status(404).json({ error: 'Recipe not found' });
-		}
-
-		return res.status(200).json({ recipe: recipes[recipeId] });
-	} catch (error) {
-		console.error('Error fetching recipe: ', error);
 		return res.status(500).json({ error: error.message });
 	}
 });
