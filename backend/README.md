@@ -1,5 +1,12 @@
 # Backend
 
+# Installing
+- Make sure all necessary dependencies are installed 
+```shell
+cd backend
+npm install
+```
+
 ## Starting the Server
 - In order to start the backend, first start the frontend:
 ```shell
