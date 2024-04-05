@@ -41,7 +41,13 @@ const axios = require ('axios')
 ```
 - Database : Initialize Firebase for user
 ```javascript
-await axios.get(`/initialize/:userId`)
+await axios.get(`/initialize/${user.uid}`, {
+	params: {
+		displayName: user.displayName,
+		uid: user.uid,
+		email: user.email
+	}
+});
 ```
 - Database : Get all recipes for user
 ```javascript
