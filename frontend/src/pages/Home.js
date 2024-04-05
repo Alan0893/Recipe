@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -15,7 +17,7 @@ const Title = styled.h1`
 	text-transform: uppercase;
 	letter-spacing: 10px;
 `;
-const Button = styled.button`
+const Button = styled(Link)`
 	font-family: Geneva;
 	display: inline-block;
 	background-color: #E9A3A2;
@@ -91,8 +93,7 @@ const Home = ({ user }) => {
 	return (
 		<Container>
 			<Title>Welcome, {user.displayName.split(' ')[0]}</Title>
-			{/* go to main page on click */}
-			<Button>Go to My Recipe</Button>  
+			<Button to="/main">Go to My Recipe</Button>  
 			<Strawberry src={"/appPics/strawberry.png"} alt="food" />
 			<Drink src={"/appPics/drink.png"} alt="milk"/>
 			<Toast src={"/appPics/toast.png"} alt="toast"/>
