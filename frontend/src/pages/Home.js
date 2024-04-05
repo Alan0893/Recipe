@@ -33,11 +33,12 @@ const Button = styled(Link)`
 	width: 280px;
 	height: 150px;
 	border-color: #E9A3A2;
-	line-height: 40px;
 	position: absolute;
 	left: 50%;
-	top: 50%;
+	top: 40%;
 	transform: translate(-50%, -50%);
+	text-decoration: none;
+	line-height: 150px;
 	&:hover,
 	&:focus {
 		background-color: #f0cc76;
