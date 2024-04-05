@@ -33,8 +33,9 @@ const Button = styled.button`
 	border-color: #E9A3A2;
 	line-height: 40px;
 	position: absolute;
-	margin-left: 800px;
-	margin-top: 350px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 	&:hover,
 	&:focus {
 		background-color: #f0cc76;
@@ -42,54 +43,48 @@ const Button = styled.button`
 		color: brown;
 	}
 `;
+
 const Strawberry = styled.img`
-	width: 30%;
+	width: 15%;
+	top: 2%;
+	left: 2%;
 	position: absolute;
-	z-index: 0;
-`;
-const Bread = styled.img` 
-	width: 320px;
-	height: auto;
-	position: absolute;
-	z-index: 0;
-	top: 340px;
-	left: 1420px;
-	rotate: -10deg;
-`;
-const Juice = styled.img` 
-	width: 330px;
-	height: auto;
-	position: absolute;
-	z-index: 0;
-	left: 1500px;
-	rotate: 10deg;
-	top: 30px;
-`;
-const Cake = styled.img`
-  width: 380px;
-  height: auto;
-  position: absolute;
-  z-index: 0;
-  top: 650px;
-  left: 1350px;
-  rotate: -10;
-`;
-const Toast = styled.img`
-  width: auto;
-  height: 300px;
-  top: 740px;
-  left: 200px;
-  position: absolute;
-  z-index: 0;
 `;
 const Drink = styled.img`
-  width: 230px;
-  height: auto;
+  width: 13%;
   top: 400px;
+	top: 33%;
+	left: 8%;
   position: absolute;
-  z-index: 0;
   rotate: 10deg;
-  left: 100px;
+`;
+const Toast = styled.img`
+  width: 17%;
+  bottom: 5%;
+  left: 15%;
+  position: absolute;
+`;
+const Juice = styled.img` 
+	width: 20%;
+	top: 0%;
+	right: 2%;
+	position: absolute;
+	z-index: 0;
+	rotate: 10deg;
+`;
+const Bread = styled.img` 
+	width: 18%;
+	top: 33%;
+	right: 8%;
+	position: absolute;
+	rotate: -10deg;
+`;
+const Cake = styled.img`
+  width: 20%;
+	bottom:  5%;
+	right: 15%;
+  position: absolute;
+  rotate: -10;
 `;
 
 const Home = ({ user }) => {
@@ -99,11 +94,11 @@ const Home = ({ user }) => {
 			{/* go to main page on click */}
 			<Button>Go to My Recipe</Button>  
 			<Strawberry src={"/appPics/strawberry.png"} alt="food" />
-			<Bread src={"/appPics/bread.png"} alt="bread2"/>
-			<Juice src={"/appPics/juice.png"} alt="juice"/>
-			<Cake src={"/appPics/cake.png"} alt="cake"/>
-			<Toast src={"/appPics/toast.png"} alt="toast"/>
 			<Drink src={"/appPics/drink.png"} alt="milk"/>
+			<Toast src={"/appPics/toast.png"} alt="toast"/>
+			<Juice src={"/appPics/juice.png"} alt="juice"/>
+			<Bread src={"/appPics/bread.png"} alt="bread2"/>
+			<Cake src={"/appPics/cake.png"} alt="cake"/>
 		</Container>
 	);
 }
