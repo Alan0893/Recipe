@@ -118,7 +118,13 @@ const LoginScreen = () => {
         // The signed-in user info
         const user = result.user;
 				// Initialize the user, if user does not exist
-				await axios.get(`/initialize/${user.uid}`);
+				await axios.get(`/initialize/${user.uid}`, {
+					params: {
+						displayName: user.displayName,
+						uid: user.uid,
+						email: user.email
+					}
+				});
       }).catch((error) => {
         // Handle Errors
         const errorCode = error.code;
