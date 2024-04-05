@@ -30,11 +30,12 @@ const Title = styled.h2`
 	font-family: Geneva; 
 	color: #E9A3A0; 
 	font-size: 2em; 
+
 `;
 const Desc = styled.h1`
 	font-family: Geneva;
 	color: #A3C14B; 
-	font-size: 6em;
+	font-size: 8em;
 	margin-bottom: 0px;
 	letter-spacing: 3px; 
 	font-weight: 150; 
@@ -59,8 +60,8 @@ const LoginButton = styled.button`
 	font-size: 125%; 
 	font-style: bold;
 	text-align: center;
-	width: 60%;
-  height: 160%;
+	width: 45%;
+  	height: 140%;
 	border-color: #E9A3A2; 
 	line-height: 40px;
 	&:hover,
