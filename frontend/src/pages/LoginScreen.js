@@ -99,11 +99,11 @@ const Image2 = styled.img`
 `;
 
 const Image3 = styled.img`
-    width: 800px;
+    width: 1100px;
     height: auto;
     position: absolute;
-    top: 40%;
-	left: 45%;
+    top: 35%;
+	left: 35%;
     transform: translate(10%, -10%); 
 `;
 
@@ -150,10 +150,10 @@ const LoginScreen = () => {
 						Login with Google
 					</LoginButton>
 				</ButtonDiv>
-				<Image1 src="leaf.png" alt="Image1" />
+				<Image1 src="/LogInPics/leaf.png" alt="Image1" />
 			</Login>
-			<Image2 src="leaf2.png" alt="Image2" />
-			<Image3 src="food.png" alt="Image3" />
+			<Image2 src="/LogInPics/leaf2.png" alt="Image2" />
+			<Image3 src="/LogInPics/food.png" alt="Image3" />
 			
 		</LoginContainer>
 	)
