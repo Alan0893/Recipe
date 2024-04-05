@@ -4,6 +4,7 @@ import { useAuth } from './api/index';
 import LoginScreen from "./pages/LoginScreen";
 import axios from 'axios';
 import MainPage from './pages/MainPage';
+
 const App = () => {
   // State to store the user
   const [user, setUser] = useAuth();
@@ -28,7 +29,7 @@ const App = () => {
   return (
     user ? 
       <div>Welcome, {user.displayName}</div> 
-      : <MainPage />
+      : <MainPage/>
   )
 }
 

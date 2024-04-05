@@ -19,9 +19,16 @@ const Box1 = styled.div`
     text-align: center;
     border-style: solid;
     margin-left: 30px;
+    background-color: #fae4e3;
+    color: #E9A3A0; 
+
+
 
     &:hover {
-        background-color: #fae4e3;
+        background-color: #f9cfcc;
+        border-color: #f9cfcc;
+        color: white;
+        cursor: pointer;
     }
 
 `;
@@ -35,9 +42,15 @@ const Box2 = styled.div`
     border-radius: 30px;
     text-align: center;
     border-style: solid;
+    background-color: #fae4e3;
+    color: #E9A3A0; 
+
 
     &:hover {
-        background-color: #fae4e3;
+        background-color: #f9cfcc;
+        border-color: #f9cfcc;
+        color: white;
+        cursor: pointer;
     }
 `;
 
@@ -52,10 +65,15 @@ const Box3 = styled.div`
     text-align: center;
     border-style: solid;
     margin-right: 30px;
+    background-color: #fae4e3;
+    color: #E9A3A0; 
 
 
     &:hover {
-        background-color: #fae4e3;
+        background-color: #f9cfcc;
+        border-color: #f9cfcc;
+        color: white;
+        cursor: pointer;
     }
 `;
 
@@ -67,14 +85,16 @@ const BoxContainer = styled.div`
     width: 100%;
     item-align: center;
     justify-content: space-between;
+    padding-top: 30px;
     
 `;
 const Title = styled.h2`
     font-family: Geneva; 
-    color: #E9A3A0; 
     font-size: 250%; 
     font-family: 'Comic Sans MS', cursive; 
     margin-top: 500px;
+
+ 
 `;
 const Image1 = styled.img`
     width: 300px;
@@ -82,7 +102,7 @@ const Image1 = styled.img`
     position: absolute;
     z-index: 0;
     top: 300px;
-    left: 100px;
+    left: 120px;
     
 `;
 
@@ -92,7 +112,7 @@ const Image2 = styled.img`
     position: absolute;
     z-index: 0;
     top: 300px;
-    left: 41%;
+    left: 43%;
     
 `;
 
@@ -102,15 +122,15 @@ const Image3 = styled.img`
     position: absolute;
     z-index: 0;
     top: 300px;
-    left: 75%;
+    left: 77%;
 `;
 
 const BinderHole1 = styled.img`
     width: 500px;
     z-index: 0;
     position: absolute;
-    top: 715px;
-    left: -10px;
+    top: -35px;
+    left: 30px;
 
 `;
 
@@ -118,8 +138,9 @@ const BinderHole2 = styled.img`
     width: 500px;
     z-index: 0;
     position: absolute;
-    top: 715px;
-    left: 510px;
+    top: -35px;
+    left: 700px;
+
 
 `;
 
@@ -127,8 +148,8 @@ const BinderHole3 = styled.img`
     width: 500px;
     z-index: 0;
     position: absolute;
-    top: 715px;
-    right: -10px;
+    right: 20px;
+    top: -35px;
 
 `;
 
