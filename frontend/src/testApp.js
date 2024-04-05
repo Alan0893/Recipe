@@ -1,4 +1,3 @@
-
 // Importing all necessary dependencies & modules
 import { useEffect, useState } from 'react';
 import { useAuth } from './api/index';
@@ -6,6 +5,7 @@ import LoginScreen from "./pages/LoginScreen";
 import axios from 'axios';
 import MainPage from './pages/MainPage';
 import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 const Container = styled.div`
     display: flex;
@@ -137,22 +137,30 @@ const App = () => {
   }, [user])
 
   console.log(recipes)
-  
   return (
-    user ? 
-      <Container>
-          <Title>Welcome, {user.displayName.split(' ')[0]}</Title>
-          {/* go to main page on click */}
-          <Button>Go to My Recipe</Button>  
-          <Strawberry src={"/appPics/strawberry.png"} alt="food" />
-          <Bread2 src={"/appPics/bread2.png"} alt="bread2"/>
-          <Juice src={"/appPics/juice.png"} alt="juice"/>
-          <Cake src={"/appPics/cake.png"} alt="cake"/>
-          <Toast src={"/appPics/toast.png"} alt="toast"/>
-          <Drink src={"/appPics/drink.png"} alt="milk"/>
-      </Container>
-          :<LoginScreen/>
-  )
+    <Router>
+    <Routes>
+        <Route path="/">
+            {user ? (
+                <Container>
+                    <Title>Welcome, {user.displayName.split(' ')[0]}</Title>
+                    <Link to="/mainpage">
+                        <Button>Go to My Recipe</Button>  
+                    </Link>
+                    <Strawberry src={"/appPics/strawberry.png"} alt="food" />
+                    <Bread src={"/appPics/bread.png"} alt="bread"/>
+                    <Juice src={"/appPics/juice.png"} alt="juice"/>
+                    <Cake src={"/appPics/cake.png"} alt="cake"/>
+                    <Toast src={"/appPics/toast.png"} alt="toast"/>
+                    <Drink src={"/appPics/drink.png"} alt="milk"/>
+                    <Bread2 src={"/appPics/bread2.png"} alt="bread2"/>
+                </Container>
+            ) : (
+                <MainPage/>
+            )}
+        </Route>
+    </Routes>
+</Router>
+);
 }
-
 export default App;
