@@ -11,6 +11,7 @@ const admin = initializeApp(config);
 
 // Setting the styles of the page
 const LoginContainer = styled.div`
+	box-sizing: border-box;
 	display: flex;
 	height: 100vh;
 	min-height: 100vh;
@@ -21,19 +22,19 @@ const LoginContainer = styled.div`
 const Login = styled.div`
 	display: flex;
 	flex-direction: column;
-	height: 100%;
+	height: 100vh;
 	margin-left: 70px; 
 	margin-top: 100px;	
 `;
 const Title = styled.h2`
 	font-family: Geneva; 
 	color: #E9A3A0; 
-	font-size: 200%; 
+	font-size: 2em; 
 `;
 const Desc = styled.h1`
 	font-family: Geneva;
 	color: #A3C14B; 
-	font-size: 600%;
+	font-size: 6em;
 	margin-bottom: 0px;
 	letter-spacing: 3px; 
 	font-weight: 150; 
@@ -80,7 +81,7 @@ const Image1 = styled.img`
 	height: auto;
 	position: absolute;
 	transform: rotate(-10deg);
-	bottom: 0%;
+	bottom: 5%;
 	left: 0%;
 	z-index: 0;
 `;
@@ -92,7 +93,7 @@ const Image2 = styled.img`
 	right: 0;
 `;
 const Image3 = styled.img`
-	width: 40%;
+	width: 45%;
 	height: auto;
 	position: absolute;
 	bottom: 0%;
@@ -142,8 +143,8 @@ const LoginScreen = () => {
 						Login with Google
 					</LoginButton>
 				</ButtonDiv>
-				<Image1 src="/LoginPics/leaf.png" alt="Image1" />
 			</Login>
+			<Image1 src="/LoginPics/leaf.png" alt="Image1" />
 			<Image2 src="/LoginPics/leaf2.png" alt="Image2" />
 			<Image3 src="/LoginPics/food.png" alt="Image3" />
 		</LoginContainer>

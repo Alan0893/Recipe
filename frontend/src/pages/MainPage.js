@@ -7,7 +7,6 @@ const MainContainer = styled.div`
     height: 100vh;
     background-color: #FFF4DF;
 `;
-
 const Box1 = styled.div`
     display: flex;
     flex-direction: column;
@@ -21,16 +20,12 @@ const Box1 = styled.div`
     margin-left: 30px;
     background-color: #fae4e3;
     color: #E9A3A0; 
-
-
-
     &:hover {
         background-color: #f9cfcc;
         border-color: #f9cfcc;
         color: white;
         cursor: pointer;
     }
-
 `;
 const Box2 = styled.div`
     display: flex;
@@ -44,8 +39,6 @@ const Box2 = styled.div`
     border-style: solid;
     background-color: #fae4e3;
     color: #E9A3A0; 
-
-
     &:hover {
         background-color: #f9cfcc;
         border-color: #f9cfcc;
@@ -53,7 +46,6 @@ const Box2 = styled.div`
         cursor: pointer;
     }
 `;
-
 const Box3 = styled.div`
     display: flex;
     flex-direction: column;
@@ -67,8 +59,6 @@ const Box3 = styled.div`
     margin-right: 30px;
     background-color: #fae4e3;
     color: #E9A3A0; 
-
-
     &:hover {
         background-color: #f9cfcc;
         border-color: #f9cfcc;
@@ -86,15 +76,12 @@ const BoxContainer = styled.div`
     item-align: center;
     justify-content: space-between;
     padding-top: 30px;
-    
 `;
 const Title = styled.h2`
     font-family: Geneva; 
     font-size: 250%; 
     font-family: 'Comic Sans MS', cursive; 
     margin-top: 500px;
-
- 
 `;
 const Image1 = styled.img`
     width: 300px;
@@ -102,20 +89,16 @@ const Image1 = styled.img`
     position: absolute;
     z-index: 0;
     top: 300px;
-    left: 120px;
-    
+    left: 120px;   
 `;
-
 const Image2 = styled.img`
     width: 300px;
     height: auto;
     position: absolute;
     z-index: 0;
     top: 300px;
-    left: 43%;
-    
+    left: 43%; 
 `;
-
 const Image3 = styled.img`
     width: 300px;
     height: auto;
@@ -124,7 +107,6 @@ const Image3 = styled.img`
     top: 300px;
     left: 77%;
 `;
-
 const BinderHole1 = styled.img`
     width: 500px;
     z-index: 0;
@@ -133,26 +115,20 @@ const BinderHole1 = styled.img`
     left: 30px;
 
 `;
-
 const BinderHole2 = styled.img`
     width: 500px;
     z-index: 0;
     position: absolute;
     top: -35px;
     left: 700px;
-
-
 `;
-
 const BinderHole3 = styled.img`
     width: 500px;
     z-index: 0;
     position: absolute;
     right: 20px;
     top: -35px;
-
 `;
-
 
 export default function MainPage() {    
     return (
