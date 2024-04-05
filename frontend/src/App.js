@@ -1,17 +1,36 @@
 
 // Importing all necessary dependencies & modules
 import { useAuth } from './api/index';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import LoginScreen from "./pages/LoginScreen";
 import Home from "./pages/Home";
+import Main from "./pages/MainPage";
+
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+  height: 100%;
+  min-height: 100vh;
+`
 
 const App = () => {
   // State to store the user
   const [user, setUser] = useAuth();
   
   return (
-    user ? 
-      <Home user={user} /> :
-      <LoginScreen />
+    <AppContainer>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path='/' element={
+            user ? 
+              <Home user={user} /> :
+              <LoginScreen />
+          } />
+          <Route path='/main' element={<Main />} />
+        </Routes>
+      </BrowserRouter>
+    </AppContainer>
   )
 }
 
