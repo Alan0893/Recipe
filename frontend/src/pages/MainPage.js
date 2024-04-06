@@ -77,34 +77,47 @@ const BoxContainer = styled.div`
     justify-content: space-between;
     padding-top: 30px;
 `;
-const Title = styled.h2`
+const Button = styled.button`
     font-family: Geneva; 
     font-size: 250%; 
     font-family: 'Comic Sans MS', cursive; 
     margin-top: 500px;
+    border-radius: 20px;
+    width: 70%;
+    margin: auto;
+    background-color: #ffb9c7;
+    border-color: #ffb9c7;
+    color: white;
+
+    &:hover {
+        cursor: pointer;
+        background-color: darkred;
+        border-color: darkred;
 `;
+
+  
 const Image1 = styled.img`
     width: 300px;
     height: auto;
     position: absolute;
     z-index: 0;
-    top: 300px;
+    top: 250px;
     left: 120px;   
 `;
 const Image2 = styled.img`
-    width: 300px;
+    width: 330px;
     height: auto;
     position: absolute;
     z-index: 0;
-    top: 300px;
+    top: 250px;
     left: 43%; 
 `;
 const Image3 = styled.img`
-    width: 300px;
+    width: 280px;
     height: auto;
     position: absolute;
     z-index: 0;
-    top: 300px;
+    top: 250px;
     left: 77%;
 `;
 const BinderHole1 = styled.img`
@@ -130,21 +143,22 @@ const BinderHole3 = styled.img`
     top: -35px;
 `;
 
+
 export default function MainPage() {    
     return (
         <MainContainer>
             <BoxContainer>
                 <Box1>
                     <Image1 src="/MainPagePics/jar.png" alt="pantry"/>
-                    <Title>Pantry</Title>
+                    <Button>Pantry</Button>
                 </Box1>
                 <Box2>
                     <Image2 src="/MainPagePics/recipe.png" alt="recipe"/>
-                    <Title>Recipes</Title>
+                    <Button>Recipes</Button>
                 </Box2>
                 <Box3>
                     <Image3 src="/MainPagePics/shoppinglist.png" alt="shopping"/>
-                    <Title>Shopping List</Title>
+                    <Button>Shopping List</Button>
                 </Box3>
             </BoxContainer>
             <BinderHole1 src="/MainPagePics/binder.png" alt="binderhole"/>
