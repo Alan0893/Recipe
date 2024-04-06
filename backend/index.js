@@ -7,7 +7,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
 // Importing modules
 const { db } = require('./util/admin');
-const { doc, getDoc } =  require('firebase/firestore');
+const { doc, getDoc, setDoc } =  require('firebase/firestore');
 
 // Initializing the express app
 const app = express();
@@ -32,28 +32,37 @@ app.get('/', (req, res) => {
 // DATABASE ****************************************************************
 // Initialize Firebase for user
 app.get('/initialize/:userId', async (req, res) => {
-	try {
-		const userId = req.params.userId;
+  try {
+    const userId = req.params.userId;
+    const { displayName, uid, email } = req.query;
 
-		// Check the users collection
-		const userDocRef = doc(db, 'users', userId);
-		const userDocSnapshot = await getDoc(userDocRef);
+    // Check if any of the required parameters are undefined
+    if (!displayName || !uid || !email) {
+      throw new Error("Required parameters are missing or undefined.");
+    }
 
-		// If the user does not exist, create a new user
-		if (!userDocSnapshot.exists()) {
-			await setDoc(userDocRef, {
-				name: user.displayName,
-				uid: user.uid,
-				email: user.email,
-				recipes: {}
-			});
-		}
-		return res.status(200).json({ message: 'User initialized' });
-	} catch (error) {
-		console.error('Error initializing user: ', error);
-		return res.status(500).json({ error: error.message });
-	}
+    // Check the users collection
+    const userDocRef = doc(db, 'users', userId);
+    const userDocSnapshot = await getDoc(userDocRef);
+
+    // If the user does not exist, create a new user
+    if (!userDocSnapshot.exists()) {
+      await setDoc(userDocRef, {
+        name: displayName,
+        uid: uid,
+        email: email,
+        recipes: {}
+      });
+      return res.status(200).json({ message: 'User initialized' });
+    } else {
+      return res.status(200).json({ message: 'User already exists' });
+    }
+  } catch (error) {
+    console.error('Error initializing user: ', error);
+    return res.status(500).json({ error: error.message });
+  }
 });
+
 // Getting a single recipe 
 app.get('/recipes/:userId/:recipeId', async (req, res) => {
 	try {
