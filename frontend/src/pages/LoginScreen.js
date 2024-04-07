@@ -65,7 +65,7 @@ const LoginButton = styled.button`
 	border-color: #E9A3A2; 
 	line-height: 40px;
 	&:hover,
-  &:focus {
+  	&:focus {
 		background-color: #d38685;
   }
 `;

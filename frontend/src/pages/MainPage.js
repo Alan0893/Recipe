@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
+
 
 // Setting the styles of the page
 
@@ -77,7 +79,7 @@ const BoxContainer = styled.div`
     justify-content: space-between;
     padding-top: 30px;
 `;
-const Button = styled.button`
+const Button = styled(Link)`
     font-family: Geneva; 
     font-size: 250%; 
     font-family: 'Comic Sans MS', cursive; 
@@ -88,6 +90,7 @@ const Button = styled.button`
     background-color: #ffb9c7;
     border-color: #ffb9c7;
     color: white;
+    text-decoration: none;
 
     &:hover {
         cursor: pointer;
@@ -150,7 +153,7 @@ export default function MainPage() {
             <BoxContainer>
                 <Box1>
                     <Image1 src="/MainPagePics/jar.png" alt="pantry"/>
-                    <Button>Pantry</Button>
+                    <Button to="/pantry">Pantry</Button>
                 </Box1>
                 <Box2>
                     <Image2 src="/MainPagePics/recipe.png" alt="recipe"/>

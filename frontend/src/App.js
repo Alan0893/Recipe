@@ -6,6 +6,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginScreen from "./pages/LoginScreen";
 import Home from "./pages/Home";
 import Main from "./pages/MainPage";
+import Pantry from "./pages/Pantry";
+import Recipes from "./pages/Recipes";
+import Cart from "./pages/ShoppingCart";
 
 import styled from 'styled-components';
 
@@ -28,6 +31,13 @@ const App = () => {
               <LoginScreen />
           } />
           <Route path='/main' element={<Main />} />
+          <Route path='/pantry' element={ 
+            user ?
+              <Pantry user={user} />:
+              <LoginScreen />
+            } />
+          <Route path='/recipes' element={<Recipes/>} />
+          <Route path='/cart' element={<Cart/>} />
         </Routes>
       </BrowserRouter>
     </AppContainer>

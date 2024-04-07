@@ -21,7 +21,7 @@ const TabContainer = styled.div`
     border-radius: 30px;
     border-color: #fae4e3;
     font-family: geneva;
-    z-index: 0;
+    z-index: 1;
     margin-bottom: 20%;
     margin-left: 25%;
     background-color: #fae4e3;
@@ -29,7 +29,6 @@ const TabContainer = styled.div`
     font-family: geneva;
     color: darkred;
     text-align: center;
-
 
 
 `;
@@ -54,17 +53,7 @@ const Title = styled.h1`
 `;
 
 
-const Tab1 = styled.div`
-    display: flex;
-    background-color: lightpink;
-    margin-top: 0;
-    width: 33%;
-    border-radius: 30px;
-    z-index: 1;
-    
-`;
-
-const Tab2 = styled(Link)`
+const Tab1 = styled(Link)`  
     display: flex;
     background-color: #fae4e3;
     margin-top: 0;
@@ -79,6 +68,15 @@ const Tab2 = styled(Link)`
         color: white;
         cursor: pointer;
     }
+`;
+
+const Tab2 = styled.div`
+    display: flex;
+    background-color: lightpink;
+    margin-top: 0;
+    width: 33%;
+    border-radius: 30px;
+    z-index: 1;
     
 `;
 
@@ -102,7 +100,7 @@ const Body = styled.div`
     display: flex;
     height: 95vh;
     background-color: lightpink;
-    flex-direction: column; 
+    flex-direction: row; 
 `;
 
 const Title2 = styled.h1`
@@ -110,39 +108,40 @@ const Title2 = styled.h1`
     color: white;
     letter-spacing: 5px;
     margin: auto;
-    z-index: 0;
 `;  
 
-const Recify = styled(Link)`
-    font-family: geneva;
-    border-radius: 20px;
-    width: 20%;
-    height: auto;
-    margin-bottom: 30%; 
-    z-index: 0;
-    margin-bottom: 50px;
-    margin-left: calc(50% - 10%);
-    text-align: center;
-    text-decoration: none;
-    font-size: 200%;
-    color: darkred;
-  `;  
+const LeftContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+`;
 
-const Pantry = ({ user })  => {
+const RightContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+`;
+
+function Recipes() {
     return (
         <Container>
             <TabContainer>
-                <Tab1><MainTitle>Pantry</MainTitle></Tab1>
-                <Tab2 to='/recipes'><Title>Recipes</Title></Tab2>
+                <Tab1 to='/pantry'><Title>Pantry</Title></Tab1>
+                <Tab2><MainTitle>Recipes</MainTitle></Tab2>
                 <Tab3 to='/cart'><Title>Shopping Cart</Title></Tab3>
             </TabContainer>
             <Body>
-                <Title2>{user.displayName.split(' ')[0]}'s Pantry</Title2>
-                <Input type="ingredient" placeholder="list ingredients you have"></Input>
-                <Recify to='/recipes'>Get Recipe</Recify>
+                <LeftContainer>
+                <Title2>Recipe</Title2>
+                <Input type="ingredient" placeholder="list ingredients and instruction"></Input>
+                </LeftContainer>
+                <RightContainer>
+                <Title2>History</Title2>
+                    <Input type="history" placeholder="previous recipes"></Input>
+                </RightContainer>
             </Body>
         </Container>
    
     );
 }   
-export default Pantry;
+export default Recipes;
