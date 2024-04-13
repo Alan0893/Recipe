@@ -80,8 +80,7 @@ const BoxContainer = styled.div`
     padding-top: 30px;
 `;
 const Button = styled(Link)`
-    font-family: Geneva; 
-    font-size: 250%; 
+    font-size: 200%; 
     font-family: 'Comic Sans MS', cursive; 
     margin-top: 500px;
     border-radius: 20px;
@@ -100,27 +99,27 @@ const Button = styled(Link)`
 
   
 const Image1 = styled.img`
-    width: 300px;
+    width: 15%;
     height: auto;
     position: absolute;
     z-index: 0;
-    top: 250px;
+    top: 28%;
     left: 120px;   
 `;
 const Image2 = styled.img`
-    width: 330px;
+    width: 15%;
     height: auto;
     position: absolute;
     z-index: 0;
-    top: 250px;
+    top: 28%;
     left: 43%; 
 `;
 const Image3 = styled.img`
-    width: 280px;
+    width: 13%;
     height: auto;
     position: absolute;
     z-index: 0;
-    top: 250px;
+    top: 28%;
     left: 77%;
 `;
 const BinderHole1 = styled.img`
@@ -128,7 +127,6 @@ const BinderHole1 = styled.img`
     z-index: 0;
     position: absolute;
     top: -35px;
-    left: 30px;
 
 `;
 const BinderHole2 = styled.img`
@@ -136,13 +134,13 @@ const BinderHole2 = styled.img`
     z-index: 0;
     position: absolute;
     top: -35px;
-    left: 700px;
+    left: 34%;
 `;
 const BinderHole3 = styled.img`
     width: 500px;
     z-index: 0;
     position: absolute;
-    right: 20px;
+    right: -1%;
     top: -35px;
 `;
 
