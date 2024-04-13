@@ -36,6 +36,7 @@ const Button = styled(Link)`
 	position: absolute;
 	left: 50%;
 	top: 40%;
+	margin-top: 80px;
 	transform: translate(-50%, -50%);
 	text-decoration: none;
 	line-height: 150px;
