@@ -126,7 +126,7 @@ app.get('/recipes/:userId', async (req, res) => {
 app.post('/recipes/:userId', async (req, res) => {
 	try {
 		const userId = req.params.userId;
-		const { name, ingredients, instructions } = req.body;
+		const { name, ingredients, instructions, shopping } = req.body;
 		
 		// Check if required fields are provided
 		if (!userId || !name || !ingredients || !instructions) {
@@ -149,7 +149,8 @@ app.post('/recipes/:userId', async (req, res) => {
 			[`recipes.${recipeId}`]: {
 				name,
 				ingredients,
-				instructions
+				instructions,
+				shopping
 			}
 		});
 

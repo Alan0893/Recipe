@@ -63,6 +63,7 @@ await axios.post(`/recipes/:userId`, {
 	name: recipeName,
 	ingredients: recipeIngredients,
 	instructions: recipeInstructions
+	shopping: shoppingList
 });
 ```
 

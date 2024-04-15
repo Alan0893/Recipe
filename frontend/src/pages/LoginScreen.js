@@ -61,9 +61,10 @@ const LoginButton = styled.button`
 	font-style: bold;
 	text-align: center;
 	width: 45%;
-  	height: 140%;
+  height: 140%;
 	border-color: #E9A3A2; 
 	line-height: 40px;
+	margin-left: 100px;
 	&:hover,
   	&:focus {
 		background-color: #d38685;
