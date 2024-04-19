@@ -30,7 +30,6 @@ const App = () => {
               <Home user={user} /> :
               <LoginScreen />
           } />
-          <Route path='/home' element={<Main />} />
           <Route path='/pantry' element={ 
             user ?
               <Pantry user={user} />:
