@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 const path = require('path');
+const cookieParser = require('cookie-parser');
+const history	= require('connect-history-api-fallback');
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
 // Importing modules
@@ -22,6 +24,17 @@ const generateId = () => {
 
 // Priority to serve any static files
 app.use(express.static(path.resolve(__dirname, '../frontend/build')));
+app.use(express.static(path.resolve(__dirname, 'public')))
+	.use(cors())
+	.use(cookieParser())
+	.use(
+		history({
+			verbose: true,
+			rewrites: [
+			]
+		})
+	)
+	.use(express.static(path.resolve(__dirname, '../frontend/build')));
 
 // ROUTING *****************************************************************
 // Home Page
