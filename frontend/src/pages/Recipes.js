@@ -6,15 +6,79 @@ const Container = styled.div`
     height: 100vh;
     flex-direction: column;
 `;
-
 const TabContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     height: 8vh;
-    margin-top: 1%;
     width: 100%;
 `;
+const MainTab = styled.div`
+    display: flex;
+    background-color: lightpink;
+    margin-top: 0;
+    width: 33%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    z-index: 1;  
+`;
+const MainTitle = styled.h1`
+    font-family: Geneva;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin: auto;
+`;
+const Tabs = styled(Link)`
+    display: flex;
+    background-color: #fae4e3;
+    margin-top: 0;
+    width: 33%;
+    z-index: 1;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    text-decoration: none;
+    color: lightpink;
+    &:hover {
+        background-color: lightpink;
+        border-color: #f9cfcc;
+        color: white; 
+        cursor: pointer;
+    }
+    &:hover h1 {
+        color: white;
+    }
+`;
+const Title = styled.h1`
+    font-family: Geneva;
+    color: lightpink;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin: auto;
+`;
+
+const Body = styled.div`
+    display: flex;
+    height: 95vh;
+    background-color: lightpink;
+    flex-direction: row; 
+`;
+const LeftContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+`;
+const RightContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+`;
+const Header = styled.h1`
+    font-family: Geneva;
+    color: white;
+    letter-spacing: 5px;
+    margin: auto;
+`;  
  const Input = styled.input`
     width: 50%;
     height: 20%;
@@ -29,114 +93,24 @@ const TabContainer = styled.div`
     font-family: geneva;
     color: darkred;
     text-align: center;
-
-
-`;
-
-const MainTitle = styled.h1`
-    font-family: geneva;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    margin: auto;
-`;
-
-const Title = styled.h1`
-    font-family: geneva;
-    color: lightpink;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    margin: auto;
-    
-    &:hover {
-        color: white;
-`;
-
-
-const Tab1 = styled(Link)`  
-    display: flex;
-    background-color: #fae4e3;
-    margin-top: 0;
-    width: 33%;
-    border-radius: 30px;
-    text-decoration: none;
-    
-
-    &:hover {
-        background-color: lightpink;
-        border-color: #f9cfcc;
-        color: white;
-        cursor: pointer;
-    }
-`;
-
-const Tab2 = styled.div`
-    display: flex;
-    background-color: lightpink;
-    margin-top: 0;
-    width: 33%;
-    border-radius: 30px;
-    z-index: 1;
-    
-`;
-
-const Tab3 = styled(Link)`
-    display: flex;
-    background-color: #fae4e3;
-    margin-top: 0;
-    width: 33%;
-    border-radius: 30px;
-    text-decoration: none;
-
-
-    &:hover {
-        background-color: lightpink;
-        border-color: #f9cfcc;
-        color: white;
-        cursor: pointer;
-    }
-`;
-const Body = styled.div`
-    display: flex;
-    height: 95vh;
-    background-color: lightpink;
-    flex-direction: row; 
-`;
-
-const Title2 = styled.h1`
-    font-family: geneva;
-    color: white;
-    letter-spacing: 5px;
-    margin: auto;
-`;  
-
-const LeftContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-`;
-
-const RightContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 50%;
 `;
 
 function Recipes() {
     return (
         <Container>
             <TabContainer>
-                <Tab1 to='/pantry'><Title>Pantry</Title></Tab1>
-                <Tab2><MainTitle>Recipes</MainTitle></Tab2>
-                <Tab3 to='/cart'><Title>Shopping Cart</Title></Tab3>
+                <Tabs to='/pantry'><Title>Pantry</Title></Tabs>
+                <MainTab><MainTitle>Recipes</MainTitle></MainTab>
+                <Tabs to='/cart'><Title>Shopping Cart</Title></Tabs>
             </TabContainer>
+
             <Body>
                 <LeftContainer>
-                <Title2>Recipe</Title2>
-                <Input type="ingredient" placeholder="list ingredients and instruction"></Input>
+                    <Header>Recipe</Header>
+                    <Input type="ingredient" placeholder="list ingredients and instruction"></Input>
                 </LeftContainer>
                 <RightContainer>
-                <Title2>History</Title2>
+                    <Header>History</Header>
                     <Input type="history" placeholder="previous recipes"></Input>
                 </RightContainer>
             </Body>
