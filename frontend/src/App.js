@@ -1,28 +1,26 @@
-
 // Importing all necessary dependencies & modules
 import { useAuth } from './api/index';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import styled from 'styled-components';
 
 import LoginScreen from "./pages/LoginScreen";
 import Home from "./pages/Home";
-import Main from "./pages/MainPage";
-import Pantry from "./pages/Pantry";
-import Recipes from "./pages/Recipes";
-import Cart from "./pages/ShoppingCart";
 
-import styled from 'styled-components';
+import Pantry from "./components/Pantry";
+import Recipes from "./components/Recipes";
+import Shopping from "./components/ShoppingCart";
 
-const AppContainer = styled.div`
+// Styling 
+const Container = styled.div`
   height: 100%;
   min-height: 100vh;
 `
-
 const App = () => {
   // State to store the user
   const [user, setUser] = useAuth();
   
   return (
-    <AppContainer>
+    <Container>
       <BrowserRouter>
         <Routes>
           <Route exact path='/' element={
@@ -30,16 +28,20 @@ const App = () => {
               <Home user={user} /> :
               <LoginScreen />
           } />
-          <Route path='/pantry' element={ 
-            user ?
-              <Pantry user={user} />:
-              <LoginScreen />
-            } />
-          <Route path='/recipes' element={<Recipes/>} />
-          <Route path='/cart' element={<Cart/>} />
+          {
+            user ? (
+              <>
+                <Route path='/pantry' element={<Pantry user={user} />} />
+                <Route path='/recipes' element={<Recipes user={user} />} />
+                <Route path='/cart' element={<Shopping user={user} />} />
+              </>
+            ) : (
+              <Route path='/' element={<LoginScreen />} />
+            )
+          }
         </Routes>
       </BrowserRouter>
-    </AppContainer>
+    </Container>
   )
 }
 

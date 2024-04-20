@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom"; 
 import styled from "styled-components";
-import { Link } from "react-router-dom"; 
+import axios from "axios";
 
 const Container = styled.div`
     display: flex;
@@ -63,39 +65,71 @@ const Body = styled.div`
     background-color: lightpink;
     flex-direction: row; 
 `;
+const Header = styled.h1`
+    font-family: Geneva;
+    color: white;
+    letter-spacing: 5px;
+    align-self: center;
+    margin-top: 5%;
+`;  
 const LeftContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 50%;
+    position: relative; 
 `;
 const RightContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 50%;
 `;
-const Header = styled.h1`
-    font-family: Geneva;
-    color: white;
-    letter-spacing: 5px;
-    margin: auto;
-`;  
- const Input = styled.input`
-    width: 50%;
-    height: 20%;
-    border-radius: 30px;
-    border-color: #fae4e3;
-    font-family: geneva;
-    z-index: 1;
-    margin-bottom: 20%;
-    margin-left: 25%;
-    background-color: #fae4e3;
-    font-size: 200%;
-    font-family: geneva;
-    color: darkred;
-    text-align: center;
+const BorderLine = styled.div`
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    right: 0; 
+    height: 80%; 
+    width: 2px; 
+    background-color: white;
 `;
 
-function Recipes() {
+const StyledInstructions = styled.div`
+    ol {
+        margin-left: 20px;
+        padding-left: 0;
+    }
+
+    li {
+        list-style-type: decimal;
+        margin-bottom: 10px;
+    }
+`;
+
+function Recipes({ user }) {
+    const location = useLocation();
+    const [recipe, setRecipe] = useState(null);
+    const [recipeId, setRecipeId] = useState(null);
+
+    // Get the recipe ID from the URL
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const id = searchParams.get('id');
+
+        if (id) {
+            setRecipeId(id);
+            fetchRecipe(id); 
+        }
+    }, [location.search])
+
+    const fetchRecipe = async (recipeId) => {
+        try {
+            const res = await axios.get(`/recipes/${user.uid}/${recipeId}`);
+            setRecipe(res.data.recipe)
+        } catch (error) {
+            console.error('Error fetching recipe: ', error);
+        }
+    }
+
     return (
         <Container>
             <TabContainer>
@@ -107,11 +141,22 @@ function Recipes() {
             <Body>
                 <LeftContainer>
                     <Header>Recipe</Header>
-                    <Input type="ingredient" placeholder="list ingredients and instruction"></Input>
+                    {
+                        recipe ? (
+                            <div>
+                                <h1>{recipe.name}</h1>
+                                <img src={recipe.image} alt={recipe.name} />
+                                <StyledInstructions dangerouslySetInnerHTML={{ __html: recipe.instructions }} />
+                            </div>
+                        ) : (
+                            <Header>Select a recipe to view</Header>
+                        )
+                    }
+                    <BorderLine />
                 </LeftContainer>
+                
                 <RightContainer>
                     <Header>History</Header>
-                    <Input type="history" placeholder="previous recipes"></Input>
                 </RightContainer>
             </Body>
         </Container>

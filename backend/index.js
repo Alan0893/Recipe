@@ -4,18 +4,23 @@ const cors = require('cors');
 const axios = require('axios');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const history	= require('connect-history-api-fallback');
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
 // Importing modules
 const { db } = require('./util/admin');
-const { doc, getDoc, setDoc } =  require('firebase/firestore');
+const { doc, getDoc, setDoc, updateDoc } =  require('firebase/firestore');
 
 // Initializing the express app
 const app = express();
 
 // Prevent CORS errors
 app.use(cors());
+
+// Use body parser to parse JSON data
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Function to generate a random string for the id
 const generateId = () => {
@@ -75,7 +80,6 @@ app.get('/initialize/:userId', async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 });
-
 // Getting a single recipe 
 app.get('/recipes/:userId/:recipeId', async (req, res) => {
 	try {
@@ -139,10 +143,10 @@ app.get('/recipes/:userId', async (req, res) => {
 app.post('/recipes/:userId', async (req, res) => {
 	try {
 		const userId = req.params.userId;
-		const { name, ingredients, instructions, shopping } = req.body;
+		const { name, ingredients, instructions, shopping, image } = req.body;
 		
 		// Check if required fields are provided
-		if (!userId || !name || !ingredients || !instructions) {
+		if (!userId || !name || !ingredients || !instructions || !shopping || !image) {
 			return res.status(400).json({ error: 'Missing required fields' });
 		}
 
@@ -163,11 +167,12 @@ app.post('/recipes/:userId', async (req, res) => {
 				name,
 				ingredients,
 				instructions,
-				shopping
+				shopping,
+				image
 			}
 		});
 
-		return res.status(200).json({ message: 'Recipe added successfully' });
+		return res.status(200).json({ message: 'Recipe added successfully', recipeId: recipeId });
  	} catch (error) {
 		console.error('Error adding recipe: ', error);
 		return res.status(500).json({ error: error.message });
@@ -247,10 +252,7 @@ app.get('/target', async (req, res) => {
 
 	try {
 		const response = await axios.get(
-			`https://api.redcircleapi.com/request?
-			api_key=${process.env.TARGET_API_KEY}&
-			type=search&search_term=${ingredient}&
-			category_id=5xt1a&sort_by=best_seller`
+			`https://api.redcircleapi.com/request?api_key=${process.env.TARGET_API_KEY}&type=search&search_term=${ingredient}&category_id=5xt1a&sort_by=best_seller`
 		);
 
 		return res.status(200).json({ response: response.data[0] });

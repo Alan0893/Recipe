@@ -96,6 +96,7 @@ const Home = ({ user }) => {
 		<Container>
 			<Title>Welcome, {user.displayName.split(' ')[0]}</Title>
 			<Button to="/pantry">Go to My Recipe</Button>  
+			
 			<Strawberry src={"/appPics/strawberry.png"} alt="food" />
 			<Drink src={"/appPics/drink.png"} alt="milk"/>
 			<Toast src={"/appPics/toast.png"} alt="toast"/>
