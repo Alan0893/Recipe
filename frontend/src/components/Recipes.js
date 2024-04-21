@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Container = styled.div`
     display: flex;
-    height: 100vh;
+    height: 100%;
     flex-direction: column;
 `;
 const TabContainer = styled.div`
@@ -61,11 +61,11 @@ const Title = styled.h1`
 
 const Body = styled.div`
     display: flex;
-    height: 95vh;
+    height: 100%;
     background-color: lightpink;
     flex-direction: row; 
 `;
-const Header = styled.h1`
+const Header = styled.h2`
     font-family: Geneva;
     color: white;
     letter-spacing: 5px;
@@ -76,7 +76,13 @@ const LeftContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 50%;
-    position: relative; 
+    height: 100vh;
+    position: relative;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 const RightContainer = styled.div`
     display: flex;
@@ -89,11 +95,20 @@ const BorderLine = styled.div`
     transform: translateY(-50%); 
     right: 0; 
     height: 80%; 
-    width: 2px; 
-    background-color: white;
+    bottom: 50%;
+    width: 5px; 
+    background-color: rgba(255, 255, 255, 0.3);
 `;
 
 const StyledInstructions = styled.div`
+    font-family: Geneva;
+    color: #590A07;
+    margin: auto; 
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+
     ol {
         margin-left: 20px;
         padding-left: 0;
@@ -104,6 +119,49 @@ const StyledInstructions = styled.div`
         margin-bottom: 10px;
     }
 `;
+
+const RecipeName = styled.h1`
+    font-family: Geneva;
+    color: white;
+    text-align: center;
+    color: #590A07;
+`;
+
+const Img = styled.img`
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+    display: flex;
+    margin: auto;
+    border: 10px solid pink;
+`;
+
+const Ulist = styled.ul`
+    font-family: Geneva;
+    color: #590A08; 
+    text-align: center; 
+    list-style-type: none;
+    margin-top: 10px;
+    padding: 0;
+
+    `; 
+
+const Item = styled.li`
+    font-family: Geneva;
+    margin-top: 5px;
+    justify-content: center; 
+    display: flex; 
+    
+`;
+
+const Label = styled.h2`
+    font-family: Geneva;
+    color: white;
+    margin-top: 20px;
+    text-align: center;
+    margin: auto; 
+    margin-top: 10px;
+`; 
 
 function Recipes({ user }) {
     const location = useLocation();
@@ -144,8 +202,17 @@ function Recipes({ user }) {
                     {
                         recipe ? (
                             <div>
-                                <h1>{recipe.name}</h1>
-                                <img src={recipe.image} alt={recipe.name} />
+                                <RecipeName>{recipe.name}</RecipeName>
+                                <Img src={recipe.image} alt={recipe.name} />
+                                <Label>Ingredients</Label>
+                                <Ulist>
+                                    {
+                                        recipe?.ingredients.map((ingredient, index) => (
+                                            <Item key={index}>{ingredient.original}</Item>
+                                        ))
+                                    }
+                                </Ulist>
+                                <Label>Instructions</Label>
                                 <StyledInstructions dangerouslySetInnerHTML={{ __html: recipe.instructions }} />
                             </div>
                         ) : (
