@@ -1,4 +1,29 @@
 # cs411BARBS
-CS411 Project
-To run the code as it is right now:
-open the folder, cd into the frontend, use npm install if needed, and then npm start! Should open a new tab with running code.
+**APIs:** Spoonacular & Unwrangle (Sam's Club)  
+**Frontend:** ReactJS  
+**Backend:** NodeJS & ExpressJS  
+**Database & OAuth:** Firebase
+
+## Running the Code:
+Begin by installing all necessary dependencies in the Frontend
+```shell
+cd frontend
+npm install
+```
+In the same terminal, build the files
+```shell
+npm run build
+```
+In the same terminal, start the Frontend
+```shell
+npm start
+```
+In a new terminal, install all necessary dependencies in the Backend
+```shell
+cd backend
+npm install
+```
+In the same terminal, start the Backend
+```shell
+node index
+```
