@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom"; 
+import { Link, useLocation, useNavigate } from "react-router-dom"; 
 import styled from "styled-components";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
     display: flex;
@@ -179,6 +181,11 @@ const RecipeContainer = styled.div`
     text-align: center;
     margin-top: 20px;
     border-radius: 20px;
+    transition: transform 0.3s ease-in-out;
+    
+    &:hover {
+        transform: scale(1.05); 
+    }
 `;
 const RecipeImage = styled.img`
     max-width: 90%;
@@ -191,9 +198,46 @@ const RecipeNames = styled.div`
     margin-top: 5px;
 `;
 
+const ErrImg = styled.img`
+    width: 50%;
+    margin: 0 auto; 
+    display: block;
+    margin-top: 30px;
+`;
+const ErrMsg = styled.h1`
+    font-family: Geneva;
+    color: #fe655a;
+    text-align: center;
+`;
+
+const ShoppingCartButton = styled.button`
+    margin-left: 25%;
+    width: 50%;
+    height: 60px; 
+    border: none;
+    border-radius: 30px;
+    background-color: #FF9AA2; 
+    font-family: Geneva;
+    font-size: 18px;
+    color: white; 
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 20px;
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+        background-color: #ff7b85;
+    }
+`;
+const CartIcon = styled(FontAwesomeIcon)`
+    margin-right: 10px;
+`;
 
 function Recipes({ user }) {
     const location = useLocation();
+    const navigate = useNavigate();
     const [recipeId, setRecipeId] = useState(null);
     const [recipe, setRecipe] = useState(null);
     const [recipes, setRecipes] = useState(null);
@@ -225,7 +269,6 @@ function Recipes({ user }) {
     const fetchAllRecipes = async () => {
         try {
             const res = await axios.get(`/recipes/${user.uid}`);
-            console.log(res.data.recipes);
             setRecipes(res.data.recipes);
         } catch (error) {
             console.error('Error fetching recipes: ', error);
@@ -239,6 +282,13 @@ function Recipes({ user }) {
         window.history.pushState(null, '', `?${searchParams.toString()}`);
         window.location.reload();
     }
+
+    const handleShoppingCartClick = async () => {
+        const searchParams = new URLSearchParams(window.location.search);
+        const id = searchParams.get('id');
+        
+        navigate(`/cart?id=${id}`)
+    };
 
     return (
         <Container>
@@ -266,9 +316,13 @@ function Recipes({ user }) {
                                 </Ulist>
                                 <Label>Instructions</Label>
                                 <StyledInstructions dangerouslySetInnerHTML={{ __html: recipe.instructions }} />
+                                <ShoppingCartButton onClick={handleShoppingCartClick}><CartIcon icon={faShoppingCart}/>Go to Shopping Cart</ShoppingCartButton>
                             </div>
                         ) : (
-                            <h1>Select a recipe to view</h1>
+                            <>
+                                <ErrImg src="/MainPagePics/recipe.png" alt="recipe" />
+                                <ErrMsg>Select a recipe to view</ErrMsg>
+                            </>
                         )
                     }
                     <BorderLine />

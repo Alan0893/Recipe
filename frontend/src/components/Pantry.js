@@ -143,13 +143,23 @@ const Pantry = ({ user })  => {
                         ingredients: ingredients
                     }
                 })
-                
+
+                const missing = res.data?.recipe?.recipe?.missedIngredients.map(ing => ing.name)
+                const targetLinks = await Promise.all(missing.map(async ingredient => {
+                    const targetRes = await axios.get(`/target`, { params: { ingredient: ingredient } });
+                    return { 
+                        name: targetRes.data?.response?.search_results[0]?.product?.title, 
+                        link: targetRes.data?.response?.search_results[0]?.product?.link,
+                        image: targetRes.data?.response?.search_results[0]?.product?.images[0]?.base_url
+                    };
+                }));
+
                 const rec = await axios.post(`/recipes/${user.uid}`, {
                     name: res.data?.recipe?.info?.title,
                     ingredients: res.data?.recipe?.info?.extendedIngredients,
                     instructions: res.data?.recipe?.info?.instructions,
-                    shopping: res.data?.recipe?.recipe?.missedIngredients,
-                    image: res.data?.recipe?.info?.image
+                    shopping: targetLinks,
+                    image: res.data?.recipe?.info?.image,
                 }, {
                     headers: {
                         'Content-Type': 'application/json'

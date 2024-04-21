@@ -255,7 +255,7 @@ app.get('/target', async (req, res) => {
 			`https://api.redcircleapi.com/request?api_key=${process.env.TARGET_API_KEY}&type=search&search_term=${ingredient}&category_id=5xt1a&sort_by=best_seller`
 		);
 
-		return res.status(200).json({ response: response.data[0] });
+		return res.status(200).json({ response: response.data });
 	} catch (error) {
 		console.error('Error fetching data from Target: ', error);
 		return res.status(500).json({ error: error.message });
