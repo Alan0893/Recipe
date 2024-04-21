@@ -246,18 +246,18 @@ app.get('/search', async (req, res) => {
 	}
 });
 
-// TARGET API ****************************************************************
-app.get('/target', async (req, res) => {
+// SAM'S CLUB API ****************************************************************
+app.get('/sam', async (req, res) => {
 	const ingredient = req.query.ingredient;
 
 	try {
 		const response = await axios.get(
-			`https://api.redcircleapi.com/request?api_key=${process.env.TARGET_API_KEY}&type=search&search_term=${ingredient}&category_id=5xt1a&sort_by=best_seller`
+			`https://data.unwrangle.com/api/getter?platform=samsclub_search&search=${ingredient}&page=1&api_key=${process.env.UNWRANGLE_API_KEY}`
 		);
 
 		return res.status(200).json({ response: response.data });
 	} catch (error) {
-		console.error('Error fetching data from Target: ', error);
+		console.error('Error fetching data from Sam\'s Club: ', error);
 		return res.status(500).json({ error: error.message });
 	}
 });

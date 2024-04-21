@@ -77,9 +77,9 @@ await axios.get('/search', {
 });
 ```
 
-- Target API : get the ingredient from target
+- Sam's Club API : get the ingredient from Sam's Club
 ```javascript
-await axios.get(`/target`, {
+await axios.get(`/sam`, {
 	params: {
 		ingredient: 'ingredient1'
 	}
