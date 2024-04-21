@@ -1,9 +1,11 @@
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom"; 
 import styled from "styled-components";
-import { Link } from "react-router-dom"; 
+import axios from "axios";
 
 const Container = styled.div`
     display: flex;
-    height: 100vh;
+    height: 100%;
     flex-direction: column;
 `;
 const TabContainer = styled.div`
@@ -12,6 +14,9 @@ const TabContainer = styled.div`
     justify-content: space-between;
     height: 8vh;
     width: 100%;
+    position: fixed;
+    background-color: white;
+    z-index: 2;
 `;
 const MainTab = styled.div`
     display: flex;
@@ -59,43 +64,85 @@ const Title = styled.h1`
 
 const Body = styled.div`
     display: flex;
-    height: 95vh;
+    height: calc(100vh - 8vh);
     background-color: lightpink;
-    flex-direction: row; 
-`;
-const LeftContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-`;
-const RightContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 50%;
+    flex-direction: column; 
+    margin-top: 8vh;
 `;
 const Header = styled.h1`
     font-family: Geneva;
     color: white;
     letter-spacing: 5px;
-    margin: auto;
+    align-self: center;
+    margin-top: 5%;
 `;  
- const Input = styled.input`
-    width: 50%;
-    height: 20%;
-    border-radius: 30px;
-    border-color: #fae4e3;
-    font-family: geneva;
-    z-index: 1;
-    margin-bottom: 20%;
-    margin-left: 25%;
-    background-color: #fae4e3;
-    font-size: 200%;
-    font-family: geneva;
-    color: darkred;
+const GridContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 80px;
+    padding: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+`;
+const ListContainer = styled.a`
+    display: inline-block;
+    width: 100%;
+    background-color: #f799a9;
+    padding: 10px;
     text-align: center;
+    margin-top: 20px;
+    border-radius: 20px;
+    transition: transform 0.3s ease-in-out;
+    text-decoration: none !important;
+    
+    &:hover {
+        transform: scale(1.05); 
+    }
+`;
+const ListImg = styled.img`
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 25px;
+`;
+const ListName = styled.div`
+    font-weight: bold;
+    margin-top: 5px;
+    color: white;
+`;
+const ListPrice = styled.div`
+    font-weight: bold;
+    margin-top: 5px;
+    color: #ff4362;
 `;
 
-function Cart() {
+
+function Cart({ user }) {
+    const location = useLocation();
+    const [recipeId, setRecipeId] = useState(null);
+    const [list, setList] = useState(null);
+
+    // Get the recipe ID from the URL
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const id = searchParams.get('id');
+
+        if (id) {
+            setRecipeId(id);
+            fetchList(id);
+        }
+    }, [location.search]);
+
+    const fetchList = async (recipeId) => {
+        try {
+            const response = await axios.get(`/recipes/${user.uid}/${recipeId}`);
+            setList(response.data.recipe.shopping);
+            console.log(response.data.recipe.shopping)
+        } catch (error) {
+            console.error('Error fetching list: ', error);
+        }
+    }
+
     return (
         <Container>
             <TabContainer>
@@ -105,14 +152,26 @@ function Cart() {
             </TabContainer>
 
             <Body>
-                <LeftContainer> 
-                    <Header>Shopping cart</Header>
-                    <Input type="ingredient" placeholder="list ingredients you need"></Input>
-                </LeftContainer>
-                <RightContainer>
-                    <Header>Previously...</Header>
-                    <Input type="Past" placeholder="Past Recipes"></Input>
-                </RightContainer>
+                <Header>Shopping Cart</Header>
+                <GridContainer>
+                {
+                    list && list.map((item, index) => (
+                        item && item.link !== "null" ? (
+                            <ListContainer key={index} href={item.link}>
+                                <ListImg src={item.image} alt={item.name} />
+                                <ListName>{item.name}</ListName>
+                                {item.price !== "N/A" && <ListPrice>${item.price}</ListPrice>}
+                            </ListContainer>
+                        ) : (
+                            <ListContainer key={index}>
+                                <ListImg src={item.image} alt={item.name} />
+                                <ListName>{item.name}</ListName>
+                            </ListContainer>
+                        )
+                    ))
+                }
+
+                </GridContainer>
             </Body>
         </Container>
    
