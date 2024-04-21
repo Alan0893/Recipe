@@ -64,10 +64,10 @@ const Title = styled.h1`
 
 const Body = styled.div`
     display: flex;
-    height: calc(100vh - 8vh);
+    height: calc(100% - 8vh);
     background-color: lightpink;
     flex-direction: column; 
-    margin-top: 8vh;
+    padding-top: 8vh;
 `;
 const Header = styled.h1`
     font-family: Geneva;
