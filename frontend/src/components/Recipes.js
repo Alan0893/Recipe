@@ -14,6 +14,9 @@ const TabContainer = styled.div`
     justify-content: space-between;
     height: 8vh;
     width: 100%;
+    position: fixed;
+    background-color: white;
+    z-index: 2;
 `;
 const MainTab = styled.div`
     display: flex;
@@ -64,6 +67,7 @@ const Body = styled.div`
     height: 100%;
     background-color: lightpink;
     flex-direction: row; 
+    margin-top: 8vh;
 `;
 const Header = styled.h2`
     font-family: Geneva;
@@ -76,28 +80,38 @@ const LeftContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 50%;
-    height: 100vh;
-    position: relative;
+    height: calc(100vh - 8vh); 
     overflow-y: auto;
-
+    position: sticky;
+    top: 8vh;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
     &::-webkit-scrollbar {
-        display: none;
+        display: none; 
     }
 `;
 const RightContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 50%;
+    position: sticky;
+    top: 8vh; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 const BorderLine = styled.div`
-    position: absolute; 
-    top: 50%; 
-    transform: translateY(-50%); 
-    right: 0; 
-    height: 80%; 
-    bottom: 50%;
+    position: fixed; 
+    top: 20%;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 60%; 
     width: 5px; 
     background-color: rgba(255, 255, 255, 0.3);
+    z-index: 3; 
 `;
 
 const StyledInstructions = styled.div`
@@ -126,7 +140,6 @@ const RecipeName = styled.h1`
     text-align: center;
     color: #590A07;
 `;
-
 const Img = styled.img`
     width: 50%;
     height: auto;
@@ -135,7 +148,6 @@ const Img = styled.img`
     margin: auto;
     border: 10px solid pink;
 `;
-
 const Ulist = styled.ul`
     font-family: Geneva;
     color: #590A08; 
@@ -143,17 +155,13 @@ const Ulist = styled.ul`
     list-style-type: none;
     margin-top: 10px;
     padding: 0;
-
-    `; 
-
+`; 
 const Item = styled.li`
     font-family: Geneva;
     margin-top: 5px;
     justify-content: center; 
     display: flex; 
-    
 `;
-
 const Label = styled.h2`
     font-family: Geneva;
     color: white;
@@ -163,10 +171,32 @@ const Label = styled.h2`
     margin-top: 10px;
 `; 
 
+const RecipeContainer = styled.div`
+    display: inline-block;
+    width: 40%;
+    background-color: #f799a9;
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 20px;
+`;
+const RecipeImage = styled.img`
+    max-width: 90%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 25px;
+`;
+const RecipeNames = styled.div`
+    font-weight: bold;
+    margin-top: 5px;
+`;
+
+
 function Recipes({ user }) {
     const location = useLocation();
-    const [recipe, setRecipe] = useState(null);
     const [recipeId, setRecipeId] = useState(null);
+    const [recipe, setRecipe] = useState(null);
+    const [recipes, setRecipes] = useState(null);
 
     // Get the recipe ID from the URL
     useEffect(() => {
@@ -186,6 +216,28 @@ function Recipes({ user }) {
         } catch (error) {
             console.error('Error fetching recipe: ', error);
         }
+    }
+
+    useEffect(() => {
+        fetchAllRecipes();
+    }, [])
+
+    const fetchAllRecipes = async () => {
+        try {
+            const res = await axios.get(`/recipes/${user.uid}`);
+            console.log(res.data.recipes);
+            setRecipes(res.data.recipes);
+        } catch (error) {
+            console.error('Error fetching recipes: ', error);
+        }
+    }
+
+    const handleRecipeClick = (id) => {
+        setRecipeId(id);
+        const searchParams = new URLSearchParams();
+        searchParams.set('id', id);
+        window.history.pushState(null, '', `?${searchParams.toString()}`);
+        window.location.reload();
     }
 
     return (
@@ -216,7 +268,7 @@ function Recipes({ user }) {
                                 <StyledInstructions dangerouslySetInnerHTML={{ __html: recipe.instructions }} />
                             </div>
                         ) : (
-                            <Header>Select a recipe to view</Header>
+                            <h1>Select a recipe to view</h1>
                         )
                     }
                     <BorderLine />
@@ -224,6 +276,23 @@ function Recipes({ user }) {
                 
                 <RightContainer>
                     <Header>History</Header>
+                    {
+                        recipes && (
+                            <Ulist>
+                                {
+                                    Object.entries(recipes).map(([recipeId, recipeData]) => (
+                                        <Item key={recipeId} onClick={() => handleRecipeClick(recipeId)}>
+                                            <RecipeContainer>
+                                                <RecipeImage src={recipeData.image} alt={recipeData.name} />
+                                                <RecipeNames>{recipeData.name}</RecipeNames>
+                                            </RecipeContainer>
+                                       </Item>
+                                       
+                                    ))
+                                }
+                            </Ulist>
+                        )
+                    }
                 </RightContainer>
             </Body>
         </Container>
