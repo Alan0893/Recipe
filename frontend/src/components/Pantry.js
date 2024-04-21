@@ -145,20 +145,32 @@ const Pantry = ({ user })  => {
                 })
 
                 const missing = res.data?.recipe?.recipe?.missedIngredients.map(ing => ing.name)
-                const targetLinks = await Promise.all(missing.map(async ingredient => {
-                    const targetRes = await axios.get(`/target`, { params: { ingredient: ingredient } });
-                    return { 
-                        name: targetRes.data?.response?.search_results[0]?.product?.title, 
-                        link: targetRes.data?.response?.search_results[0]?.product?.link,
-                        image: targetRes.data?.response?.search_results[0]?.product?.images[0]?.base_url
-                    };
+
+                const samLinks = await Promise.all(missing.map(async ingredient => {
+                    const samRes = await axios.get(`/sam`, { params: { ingredient: ingredient } });
+                    
+                    if (samRes.data.response.result_count == 0) {
+                        return {
+                            name: ingredient,
+                            link: null,
+                            image: 'https://www.us2guntur.com/assets/images/Productnotavl.jpg',
+                            price: 'N/A'
+                        };
+                    } else {
+                        return { 
+                            name: samRes.data.response.results[0].name || null, 
+                            link: samRes.data.response.results[0].seo_url || null,
+                            image: samRes.data.response.results[0].thumbnail || null,
+                            price: samRes.data.response.results[0].price || null
+                        };
+                    }
                 }));
 
                 const rec = await axios.post(`/recipes/${user.uid}`, {
                     name: res.data?.recipe?.info?.title,
                     ingredients: res.data?.recipe?.info?.extendedIngredients,
                     instructions: res.data?.recipe?.info?.instructions,
-                    shopping: targetLinks,
+                    shopping: samLinks,
                     image: res.data?.recipe?.info?.image,
                 }, {
                     headers: {
