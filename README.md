@@ -1,5 +1,5 @@
 # cs411BARBS
-**APIs:** Spoonacular & Unwrangle (Sam's Club)  
+**APIs:** [Spoonacular](https://spoonacular.com/food-api/docs) & [Unwrangle (Sam's Club)](https://www.unwrangle.com/)  
 **Frontend:** ReactJS  
 **Backend:** NodeJS & ExpressJS  
 **Database & OAuth:** Firebase
